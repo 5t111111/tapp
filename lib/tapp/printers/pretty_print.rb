@@ -1,21 +1,13 @@
-require 'tapp/printer'
-
-module Tapp::Printer
-  class PrettyPrint < Base
-    def print(*args)
+module Tapp
+  module Printers
+    class PrettyPrint
       require 'pp'
-
-      self.class.class_eval do
-        remove_method :print
-
-        def print(*args)
-          pp(*args)
-        end
+      include Singleton
+      def print(*args)
+        pp(*args)
       end
-
-      print(*args)
     end
-  end
 
-  register :pretty_print, PrettyPrint
+    Printer.instance.klasses[:pretty_print] = PrettyPrint
+  end
 end

@@ -14,8 +14,8 @@ module Tapp
       @klasses = {}
     end
 
-    def setup(delegator)
-      @delegator = @klasses[delegator].instance
+    def setup(printer)
+      @delegator = @klasses[printer].instance
     rescue NoMethodError
       raise NotImplementedError
     end

@@ -1,11 +1,12 @@
-require 'tapp/printer'
-
-module Tapp::Printer
-  class Puts < Base
-    def print(*args)
-      puts(*args)
+module Tapp
+  module Printers
+    class Puts
+      include Singleton
+      def print(*args)
+        puts(*args)
+      end
     end
-  end
 
-  register :puts, Puts
+    Printer.instance.klasses[:puts] = Puts
+  end
 end
