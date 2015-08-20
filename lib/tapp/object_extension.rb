@@ -9,7 +9,7 @@ module Tapp
       if Tapp.config.decoration
         require 'tapp/print_decorator'
         decorator = Tapp::PrintDecorator.instance
-        decorator.register_delegator(Tapp::Printer.instance(printer))
+        decorator.register_printer(Tapp::Printer.instance(printer))
         tap {
           decorator.print block_given? ? yield(self) : self
         }

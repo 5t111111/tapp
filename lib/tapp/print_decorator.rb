@@ -1,20 +1,15 @@
-require 'forwardable'
-
 module Tapp
   class PrintDecorator
     include Singleton
-    extend Forwardable
 
-    delegate [:print] => :@delegator
-
-    def register_delegator(delegator)
-      @delegator = delegator
+    def register_printer(printer)
+      @printer = printer
     end
 
     def print(*args)
       decoration = "~*" * 30
       puts decoration
-      @delegator.print(*args)
+      @printer.print(*args)
       puts decoration
     end
   end
