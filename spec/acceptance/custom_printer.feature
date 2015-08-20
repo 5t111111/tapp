@@ -4,14 +4,15 @@ Feature: Custom printer
     """
     require 'tapp/printer'
 
-    module Tapp::Printer
-      class MyPrinter < Base
+    module Tapp::Printers
+      class MyPrinter
+        include Singleton
         def print(*args)
           puts "*** #{args.join(' ')} ***"
         end
       end
 
-      register :my_printer, MyPrinter
+      Printer.instance.klasses[:my_printer] = MyPrinter
     end
 
     %w(foo bar).tapp(:my_printer)

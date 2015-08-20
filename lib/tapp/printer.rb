@@ -1,25 +1,23 @@
 require 'singleton'
+require 'forwardable'
 
 module Tapp
-  module Printer
-    @printers = {}
+  class Printer
+    include Singleton
+    extend Forwardable
 
-    class << self
-      def register(name, printer)
-        @printers[name] = printer
-      end
+    delegate [:print] => :@delegator
 
-      def instance(name)
-        @printers.fetch(name).instance
-      end
+    attr_accessor :klasses
+
+    def initialize
+      @klasses = {}
     end
 
-    class Base
-      include Singleton
-
-      def print(*args)
-        raise NotImplementedError
-      end
+    def setup(delegator)
+      @delegator = @klasses[delegator].instance
+    rescue NoMethodError
+      raise NotImplementedError
     end
   end
 end

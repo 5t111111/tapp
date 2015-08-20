@@ -6,9 +6,9 @@ module Tapp
     def tapp(printer = Tapp.config.default_printer)
       Tapp::Util.report_called if Tapp.config.report_caller
 
-      tap {
-        Tapp::Printer.instance(printer).print block_given? ? yield(self) : self
-      }
+      tap do
+        Tapp::Printer.instance.setup(printer).print block_given? ? yield(self) : self
+      end
     end
 
     def taputs(&block)
