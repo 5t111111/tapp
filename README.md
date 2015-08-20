@@ -23,6 +23,7 @@ See more examples in [spec/acceptance](https://github.com/esminc/tapp/tree/maste
 Tapp.configure do |config|
   config.report_caller   = true
   config.default_printer = :puts
+  config.decoration      = true
 end
 ```
 
@@ -41,6 +42,11 @@ end
     <td><code>default_printer</code></td>
     <td><code>:pretty_print</code></td>
     <td><a href="https://github.com/esminc/tapp/blob/master/spec/acceptance/default_printer.feature">default_printer.feature</a></td>
+  </tr>
+  <tr>
+    <td><code>decoration</code></td>
+    <td><code>false</code></td>
+    <td><a href="https://github.com/esminc/tapp/blob/master/spec/acceptance/tapp.feature">tapp.feature</a></td>
   </tr>
 </table>
 

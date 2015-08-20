@@ -6,9 +6,18 @@ module Tapp
     def tapp(printer = Tapp.config.default_printer)
       Tapp::Util.report_called if Tapp.config.report_caller
 
-      tap {
-        Tapp::Printer.instance(printer).print block_given? ? yield(self) : self
-      }
+      if Tapp.config.decoration
+        require 'tapp/print_decorator'
+        decorator = Tapp::PrintDecorator.instance
+        decorator.register_delegator(Tapp::Printer.instance(printer))
+        tap {
+          decorator.print block_given? ? yield(self) : self
+        }
+      else
+        tap {
+          Tapp::Printer.instance(printer).print block_given? ? yield(self) : self
+        }
+      end
     end
 
     def taputs(&block)
