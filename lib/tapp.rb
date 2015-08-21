@@ -4,6 +4,7 @@ require 'tapp/object_extension'
 
 require 'tapp/printers/pretty_print'
 require 'tapp/printers/puts'
+require 'tapp/decorator'
 
 module Tapp
   extend Deprecated

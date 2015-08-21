@@ -4,6 +4,8 @@ Feature: Custom printer
     """
     require 'tapp/printer'
 
+    Tapp.config.decoration = false
+
     module Tapp::Printers
       class MyPrinter
         include Singleton

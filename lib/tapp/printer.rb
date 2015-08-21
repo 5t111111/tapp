@@ -9,13 +9,21 @@ module Tapp
     delegate [:print] => :@delegator
 
     attr_accessor :klasses
+    attr_accessor :decorated
 
     def initialize
       @klasses = {}
+      @decorated = false
     end
 
     def setup(printer)
-      @delegator = @klasses[printer].instance
+      if Tapp.config.decoration
+        Tapp::Decorator.instance.setup(@klasses[printer].instance)
+        @delegator = Tapp::Decorator.instance
+      else
+        @delegator = @klasses[printer].instance
+      end
+      self
     rescue NoMethodError
       raise NotImplementedError
     end

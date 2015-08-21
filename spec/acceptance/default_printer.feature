@@ -3,6 +3,7 @@ Feature: config.default_printer
     Given I have the following code:
     """
     Tapp.config.default_printer = :puts
+    Tapp.config.decoration = false
 
     'hoge'.tapp
     """
